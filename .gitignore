@@ -21,3 +21,50 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+app.js from lesson 295 colt steele
+const jokes = document.querySelector('#jokes');
+const button = document.querySelector('button');
+
+
+const addNewJoke = async () => {
+    const jokeText = await getDadJoke()
+    console.log(jokeText)
+    const newLI = document.createElement('LI');
+    newLI.append(jokeText);
+    jokes.append(newLI);
+}
+
+const getDadJoke = async () => {
+    try {
+        const config = { headers: { Accept: 'application/json' } }
+        const res = await axios.get('https://icanhazdadjoke.com/', config)
+        return res.data.joke;
+    } catch (e) {
+        return "NO JOKES AVAILABLE! SORRY :("
+    }
+
+}
+
+button.addEventListener('click', addNewJoke)
+html from 295
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Click to get new Jokes</h1>
+    <button>click me!</button>
+    <ul id="jokes"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+
+
+</body>
+
+</html>
